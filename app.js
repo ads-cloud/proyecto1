@@ -1,7 +1,12 @@
-const express = require('express')
-const app =  express()
+const express = require('express');
+const app = express();
 const pokemonesRoutes = require('./routes')
-app.use(express.json())
-app.use('/pokemon', pokemonesRoutes)
+const cors = require('cors')
 
-module.exports = app
+const optionCors = require('./middelware/cors')
+
+app.use(cors())
+app.use(express.json())
+app.use('/pokemon',cors(optionCors), pokemonesRoutes)
+
+module.exports = app;
